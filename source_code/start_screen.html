@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+    <meta charset="UTF-8" />
+    <title>スタート画面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- style sheet-->
+    <link rel="stylesheet" href="start_screen.css">
+
+</head>
+
+
+<body>
+    <!-- ① スタート画面 -->
+    <div id="start-screen">
+        <h1>柏崎スタンプラリー</h1>
+        <button id="start-button">スタート</button>
+    </div>
+
+    <script>
+    // スタートボタン押下 → アプリ画面に
+        document.getElementById("start-button").addEventListener("click", () => {
+            // TODO Cookieの確認　→　存在するなら以前のデータを読み込み、ないなら新たなレコードとcookieの作成
+
+               // データベースの確認及び新規作成
+            fetch("app_database.php", {
+                method:"POST",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({action:"start"})
+                })
+            .then(res => res.json())
+            .then(json => {
+                console.log("サーバー応答(start画面):", json);
+                })
+            .catch(err => {
+                console.error("通信エラー:", err);
+                });
+
+            // COOKIEの設定直後に移動すると、反映されない可能性があるため、少し(0.1秒)待つ
+            setTimeout(() => {
+                location.href = "allmap.html";
+                }, 100);
+        });
+    </script>
+</body>

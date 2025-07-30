@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+    <meta charset="UTF-8" />
+    <title>全体マップ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- style sheet-->
+    <link rel="stylesheet" href="allmap.css">
+
+</head>
+
+
+
+<body>
+<!-- TODO　Cookieによるユーザー認識 -->
+
+    <!-- 柏崎市地図 -->
+    <div id = "map_screen">
+        <div id="map"></div>
+    </div>
+
+    <div id="map_screen">
+        <div id="map"></div>
+        <div id="toggle_text" onclick="toggleExplanation()">
+            位置情報がスタンプラリー実施場所から300m以内に入ると自動的に構内マップに切り替わります→
+        </div>
+    </div>
+
+    <script>
+    // 説明文の切り替え
+    function toggleExplanation() {
+        const text = document.getElementById("toggle_text");
+        if (text.dataset.state === "first") {
+            text.innerText = "←地図上のピンをタップすることでも構内マップに切り替わります";
+            text.dataset.state = "second";
+        } else {
+            text.innerText = "位置情報がスタンプラリー実施場所から300m以内に入ると自動的に構内マップに切り替わります→";
+            text.dataset.state = "first";
+        }
+    }
+    </script>
+
+    <script>
+        //マップ設定
+        const niitechLatLng = [37.339278, 138.578972];
+        const map = L.map('map').setView(niitechLatLng, 16);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        const niitechMarker = L.marker(niitechLatLng).addTo(map)
+            .bindPopup("新潟工科大学<br>クリックで構内マップへ")
+            .on('click', () => {
+                location.href = "app_screen.html";
+            });
+
+        // 現在地取得して300m以内なら自動で切替  TODO 読み込み時ではなく、随時できるようにしたい
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                const distance = map.distance([lat, lng], niitechLatLng);
+
+                const redIcon = L.divIcon({ className: 'current-location-pin' });
+                L.marker([lat, lng], { icon: redIcon }).addTo(map).bindPopup("現在地").openPopup();
+
+                if (distance <= 300) {
+                    location.href = "app_screen.html";
+                    }
+                },
+                () => {alert("位置情報の取得に失敗しました。");}
+            );
+        }
+        else {
+            alert("この端末では位置情報が利用できません。");
+        }
+
+    </script>
+</body>
+</html>

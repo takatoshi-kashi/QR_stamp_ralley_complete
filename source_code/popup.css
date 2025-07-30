@@ -1,0 +1,198 @@
+/*popup template design*/
+.popup-background{
+    /*position size*/
+    position: fixed;
+    z-index : 100;
+    top : 0;
+    left : 0;
+    height : 100vh;
+    width : 100vw;
+
+    /*design*/
+    background-color: gray;
+    opacity : 0.5
+}
+.popup{
+    /*position size*/
+    --height : 500px;
+    --width : 300px;
+    z-index : 101;
+    position: fixed;
+    top : calc(50vh - calc(var(--height) / 2));
+    left : calc(50vw - calc(var(--width) / 2));
+    height : var(--height);
+    width : var(--width);
+
+    /*design*/
+    overflow: hidden;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 1px gray;
+}
+.popup > .close-button{
+    /*position size*/
+    --size : 20px;
+    position:absolute;
+    top : calc(var(--size)/4);
+    left : calc(var(--width) - var(--size) * 5/4);/*css variables are available in children*/
+    height : var(--size);
+    width : var(--size);
+
+    /*design*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color : gray;
+    font-size: var(--size);
+    border-radius: calc(var(--size)/5);
+}
+.popup > .close-button:hover{
+    /*design*/
+    background-color: red;
+    color : white;
+}
+
+.popup > .text_common_1{
+    width : 100%;
+    position: absolute;
+    top:30px;
+    text-align: center;
+    font-size: 1.8em;
+    color: rgb(0, 0, 0);
+}
+
+.popup > .text_column_1{
+    width : 100%;
+    position: absolute;
+    top:350px;
+    text-align: center;
+    font-size: 1.0em;
+    color: rgb(0, 0, 0);
+}
+
+.popup > .content_1{
+    padding: 10px;
+
+    position: absolute;
+    top: 100px;
+    height: 200px;
+    width: 290px;
+    background-image: url("spot_n.jpg");
+    background-size: cover;
+}
+
+.popup > .content_2{
+    padding: 10px;
+
+    position: absolute;
+    top: 100px;
+    height: 200px;
+    width: 290px;
+    background-image: url("spot_s_2.jpg");
+    background-size: cover;
+}
+
+
+.popup > .content_3{
+    padding: 10px;
+
+    position: absolute;
+    top: 100px;
+    height: 200px;
+    width: 290px;
+    background-image: url("spot_w.jpg");
+    background-size: cover;
+}
+
+
+.popup > .content_4{
+    padding: 10px;
+
+    position: absolute;
+    top: 100px;
+    height: 200px;
+    width: 290px;
+    background-image: url("spot_s_4.jpg");
+    background-size: cover;
+}
+
+.popup > .content_5{
+    padding: 10px;
+
+    position: absolute;
+    top: 100px;
+    height: 200px;
+    width: 290px;
+    background-image: url("end.png");
+    background-size: cover;
+}
+
+.popup_end{
+    /*position size*/
+    --height : 300px;
+    --width : 350px;
+    z-index : 101;
+    position: fixed;
+    top : calc(50vh - calc(var(--height) / 2));
+    left : calc(50vw - calc(var(--width) / 2));
+    height : var(--height);
+    width : var(--width);
+
+    /*design*/
+    overflow: hidden;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 1px gray;
+}
+
+.popup_end > .close-button{
+    /*position size*/
+    --size : 20px;
+    position:absolute;
+    top : calc(var(--size)/4);
+    left : calc(var(--width) - var(--size) * 5/4);/*css variables are available in children*/
+    height : var(--size);
+    width : var(--size);
+
+    /*design*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color : gray;
+    font-size: var(--size);
+    border-radius: calc(var(--size)/5);
+}
+
+.popup_end > .close-button:hover{
+    /*design*/
+    background-color: red;
+    color : white;
+}
+
+.popup_end > .content_5{
+    position: absolute;
+    top:20%;
+    height: 45%;
+    width: 100%;
+    background-image: url("end.png");
+    background-size: cover;
+}
+
+
+
+/*hide popup*/
+.popup-flag{
+    display:none;
+}
+.popup-flag:not(:checked) + .popup-background{
+    display:none;
+}
+.popup-flag:not(:checked) + * + .popup{
+    display:none;
+}
+
+.popup-flag:not(:checked) + * + .popup_end{
+    display:none;
+}

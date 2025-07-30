@@ -1,0 +1,117 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: sans-serif;
+    background-color: #000;
+    color: #fff;
+}
+
+#campus-map-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    color: #000;
+}
+
+#campus-map {
+    position: relative;
+    height: 40vh;
+    width: 100%;
+    background-image: url("map1.PNG");
+    background-size: cover;
+}
+
+.spot {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 200, 200, 0.9);
+    text-align: center;
+    line-height: 2.5em;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: default;
+}
+
+.cleared {
+    background-color: rgba(100, 200, 100, 0.9);
+    }
+
+#back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    padding: 6px 12px;
+    background-color: white;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+
+/* ② 地図＋QR画面 */
+#reader-container {
+      position: fixed;
+      bottom: 20px;
+      right: 0px;
+      width: 200px;
+      height: 200px;
+      background-color: #000;
+      border: 2px solid #00aaff;
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 10001;
+      display: none;
+    }
+
+#reader {
+      width: 100%;
+      height: 100%;
+    }
+
+#close-btn {
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      background: #00aaff;
+      border: none;
+      color: white;
+      padding: 4px 8px;
+      font-size: 0.9em;
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 10002;
+    }
+
+#qr-button {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      z-index: 10000;
+      padding: 16px 20px;
+      font-size: 1.2em;
+      background-color: #00aaff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+    }
+
+#result {
+      position: fixed;
+      bottom: 10px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 1em;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 6px;
+      z-index: 9000;
+      word-break: break-word;
+    }
