@@ -41,9 +41,11 @@
 		            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 		            header('Content-Type: application/json');
 		            if ($data){
+                                     // 既存データベースの使用
 		                echo json_encode(['status' => 'ok']);
 		                exit;
 		            } else{
+                                     // データベースの新規作成
 		                $stmt = $db->prepare("INSERT INTO user_data (id, w_ridge, s_ridge, n_ridge, g_ridge) VALUES (?, 0, 0, 0, 0)");
 		                $stmt->execute([$user_id]);
 		                echo json_encode(['status' => 'add']);
@@ -79,11 +81,13 @@
                         exit;
                           }
                     $ridge = $json['ridge'] ?? null;
+                          // 読み取ったQRコードの値が関係無いものなら無視
                     if (!in_array($ridge, ['w_ridge', 's_ridge', 'n_ridge', 'g_ridge'])) {
                         http_response_code(400);
                         echo json_encode(['error' => 'invalid ridge']);
                         exit;
                           }
+                         // 読み取ったQRコードの値がデータベースにあればその棟の値を1に変更
                     $stmt = $db->prepare("UPDATE user_data SET $ridge = 1 WHERE id = ?");
                     $stmt->execute([$user_id]);
                     echo json_encode(['data' => 'ok']);

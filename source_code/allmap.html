@@ -18,8 +18,6 @@
 
 
 <body>
-<!-- TODO　Cookieによるユーザー認識 -->
-
     <!-- 柏崎市地図 -->
     <div id = "map_screen">
         <div id="map"></div>
@@ -61,7 +59,7 @@
                 location.href = "app_screen.html";
             });
 
-        // 現在地取得して300m以内なら自動で切替  TODO 読み込み時ではなく、随時できるようにしたい
+        // 現在地取得して300m以内なら自動で切替 
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(position => {
                 const lat = position.coords.latitude;
